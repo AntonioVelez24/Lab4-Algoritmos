@@ -1,6 +1,7 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 public class GameManager : MonoBehaviour
 {
@@ -24,31 +25,45 @@ public class GameManager : MonoBehaviour
         AddTurn();
         ReadCurrentTurn();
     }
-    [Button("Avanzar Turno")]
+    [Button("Next Turn")]
     public void AddTurn()
     {
-        Turn newTurn = new Turn(TurndoubleLinkedList.count +1, entityList);
+        Turn newTurn = new Turn(TurndoubleLinkedList.count + 1, entityList);
         TurndoubleLinkedList.Add(newTurn);
         print("Turno " + newTurn.CurrentTurn + " añadido");
+
+        UpdateEntitiesPosition(newTurn.Entities);
     }
 
     #region Peak
     [Button("Next Turn (Peak)")]
-    public void PeakNext()
+    public void PeakNextTurn()
     {
-
+        TurndoubleLinkedList.PeakNext();
+        print("Turno: " + TurndoubleLinkedList.peak.Value.CurrentTurn);
+        TurndoubleLinkedList.SetCount(TurndoubleLinkedList.peak.Value.CurrentTurn);
     }
     [Button("Previous Turn (Peak)")]
-    public void PeakPrev()
+    public void PeakPrevTurn()
     {
-
+        TurndoubleLinkedList.PeakPrev();
+        print("Turno: " + TurndoubleLinkedList.peak.Value.CurrentTurn);
+        TurndoubleLinkedList.SetCount(TurndoubleLinkedList.peak.Value.CurrentTurn);
     }
     #endregion
+
     #region Read
     [Button("Read Current Turn")]
     public void ReadCurrentTurn()
     {
-        TurndoubleLinkedList.last.Value.PrintTurn();
+        if (TurndoubleLinkedList.peak != null)
+        {
+            TurndoubleLinkedList.peak.Value.PrintTurn();
+        }
+        else
+        {
+            print("No hay turnos disponibles.");
+        }
     }
     [Button("Read Count")]
     public void TurnCount()
@@ -62,6 +77,12 @@ public class GameManager : MonoBehaviour
     {
         return new Entity(entityName,position);
     }
+    public void UpdateEntitiesPosition(List<Entity> newEntities)
+    {
+        for (int i = 0; i < entityList.Count; i++)
+        {
+            entityList[i].SetPosition(newEntities[i].Position);
+        }
+    }
     #endregion
-
 }
