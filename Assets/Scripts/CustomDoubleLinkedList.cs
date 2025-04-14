@@ -1,27 +1,15 @@
 using System.Collections.Generic;
 
-public class CustomDoubleLinkedList : DoubleLinkedList<CustomNode>
+public class CustomDoubleLinkedList<T> : DoubleLinkedList<T>
 {
-    public Node<CustomNode> peak { get; private set; }
-    public int peakIndex { get; private set; }
+    //public Node<T> peak;
+    //public int peakIndex;
 
-    public override void Add(CustomNode value)
+    public override void Add(T value)
     {
-        if (peak != last && peak != null)
-        {
-            Node<CustomNode> temp = peak.Next;
-            while (temp != null)
-            {
-                Node<CustomNode> next = temp.Next;
-                temp = next;
-            }
-
-            last = peak;
-            last.SetNext(null);
-        }
-
         base.Add(value);
-        peak = last;
-        peakIndex = count - 1;
-    }
+        //peak = last;
+        //peakIndex = count - 1;
+    } 
+
 }

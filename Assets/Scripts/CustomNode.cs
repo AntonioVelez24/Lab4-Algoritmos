@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CustomNode : Node<CustomNode>
+public class CustomNode : Node<int>
 {
     [SerializeField] private int currentTurn;
 
@@ -11,9 +11,9 @@ public class CustomNode : Node<CustomNode>
     public int CurrentTurn => currentTurn;
     public List<Entity> Entities => entities;
 
-    public CustomNode(int currentTurn, List<Entity> entities) : base(null)
+    public CustomNode(int currentTurn, List<Entity> entities, int value) : base(value)
     {
         this.currentTurn = currentTurn;
-        this.entities = new List<Entity>(entities); 
+        this.entities = entities; 
     }
 }

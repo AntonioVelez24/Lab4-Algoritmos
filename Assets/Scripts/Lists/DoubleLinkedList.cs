@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoubleLinkedList<T> : MonoBehaviour
+public class DoubleLinkedList<T> 
 {
     public Node<T> head = null;
     public Node<T> last = null;
@@ -31,7 +31,7 @@ public class DoubleLinkedList<T> : MonoBehaviour
     {
         if (head == null || deep >= count)
         {
-            print("No hay elementos en la lista o No se encontro elemento");
+            Debug.Log("No hay elementos en la lista o No se encontro elemento");
             return null;
         }
         if (_head == null)
@@ -39,8 +39,8 @@ public class DoubleLinkedList<T> : MonoBehaviour
 
         if (_head.Value.Equals(objective))
         {
-            print("Elemento encontrado: " + _head.Value.ToString());
-            print("Se encontro en la posicion: " + deep);
+            Debug.Log("Elemento encontrado: " + _head.Value.ToString());
+            Debug.Log("Se encontro en la posicion: " + deep);
             return _head;
         }
         else
@@ -51,7 +51,7 @@ public class DoubleLinkedList<T> : MonoBehaviour
     {
         if (head == null || deep >= count)
         {
-            print("No hay elementos en la lista o No se encontro elemento");
+            Debug.Log("No hay elementos en la lista o No se encontro elemento");
             return null;
         }
         if (_head == null)
@@ -59,8 +59,8 @@ public class DoubleLinkedList<T> : MonoBehaviour
 
         if (_pos == deep && _pos <= count)
         {
-            print("Elemento encontrado: " + _head.Value.ToString());
-            print("Se encontro en la posicion: " + deep);
+            Debug.Log("Elemento encontrado: " + _head.Value.ToString());
+            Debug.Log("Se encontro en la posicion: " + deep);
             return _head;
         }
         else
@@ -96,8 +96,8 @@ public class DoubleLinkedList<T> : MonoBehaviour
         {
             _head = head;
         }
-        print("" + _head.Value.ToString());
-        print(" ↓ ");
+        Debug.Log("" + _head.Value.ToString());
+        Debug.Log(" ↓ ");
 
         ReadFromStart(_head.Next, deep + 1);
     }
@@ -109,8 +109,8 @@ public class DoubleLinkedList<T> : MonoBehaviour
         {
             _last = last;
         }
-        print("" + _last.Value.ToString());
-        print(" ↓ ");
+        Debug.Log("" + _last.Value.ToString());
+        Debug.Log(" ↓ ");
 
         ReadFromEnd(_last.Prev, deep + 1);
     }
@@ -121,7 +121,7 @@ public class DoubleLinkedList<T> : MonoBehaviour
 
         if (node == null)
         {
-            print("No existe elemento");
+            Debug.Log("No existe elemento");
             return;
         }
         #region NodoEsElPrimero
